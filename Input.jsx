@@ -49,8 +49,6 @@ export default class Input extends Component {
     this.setState({
       selectionList: sl
     }, ()=>{
-      console.log(this.state.selectionList);
-      console.log("sdfs "+this.state.selectionList[this.state.selectionList.length-1][0]);
 
       var l = this.state.participants.slice();
       var ide = this.state.selectionList.length;
@@ -59,13 +57,13 @@ export default class Input extends Component {
      <tr>
           <th><input /></th>
           <th id={ide + 0} onClick={() => this.changeSelection(ide-1, 0)}>
-          {this.state.selectionList[ide-1][0] == 1 ? "S" : "NS"}
+          {this.state.selectionList[ide-1][0] == 1 ? "Selected" : "Not Selected"}
           </th>
           <th id={ide + 1} onClick={() => this.changeSelection(ide-1, 1)}>
-          {this.state.selectionList[ide-1][1] == 1 ? "S" : "NS"}
+          {this.state.selectionList[ide-1][1] == 1 ? "Seclected" : "Not Selected"}
           </th>
           <th id={ide + 2} onClick={() => this.changeSelection(ide-1, 2)}>
-          {this.state.selectionList[ide-1][2] == 1 ? "S" : "NS"}
+          {this.state.selectionList[ide-1][2] == 1 ? "Selected" : "Not Selected"}
           </th>
         </tr> ;
     this.setState({
@@ -86,13 +84,13 @@ export default class Input extends Component {
         <tr>
           <th><input /></th>
           <th id={ide + 0} onClick={() => this.changeSelection(ide-1, 0)}>
-          {this.state.selectionList[ide-1][0] == 1 ? "S" : "NS"}
+          {this.state.selectionList[ide-1][0] == 1 ? "Selected" : "Not Selected"}
           </th>
           <th id={ide + 1} onClick={() => this.changeSelection(ide-1, 1)}>
-          {this.state.selectionList[ide-1][1] == 1 ? "S" : "NS"}
+          {this.state.selectionList[ide-1][1] == 1 ? "Selected" : "Not Selected"}
           </th>
           <th id={ide + 2} onClick={() => this.changeSelection(ide-1, 2)}>
-          {this.state.selectionList[ide-1][2] == 1 ? "S" : "NS"}
+          {this.state.selectionList[ide-1][2] == 1 ? "Selected" : "Not Selected"}
           </th>
         </tr>
       );
@@ -124,6 +122,7 @@ export default class Input extends Component {
           </tbody>
         </table> 
         <button className="addPart" onClick={() => this.addParticipant()}>Add participant</button>
+        <div>* For selecting a venue click on the row of your name and the column name of the venue.</div>
         </div>: null}
       </div>
     )
