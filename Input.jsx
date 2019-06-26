@@ -17,22 +17,25 @@ export default class Input extends Component {
   getSearchResult(){
     this.state = ({
       venues : [],
-      participants: []
-    });
-    let ne = this.refs.venueSearchText.value;
-    if(ne == ""){
-      return false;
-    }
+      participants: [],
+      selectionList:[],
+      selectionCount: []
+    })
+      let ne = this.refs.venueSearchText.value;
+      if(ne == ""){
+        return false;
+      }
 
-    const url = "https://api.foursquare.com/v2/venues/search?client_id=GOYOWCND2OYMVHWLQSXIGNCFWJMRNQPP3N1HZ3J1M1UIZXHT&client_secret=DZBJ0LH5CIP0Z2GG0TNJHY153YT34EF0XFJH0ZD0HEEJ4WT2&query=lunch&near={ne}&v=20170801&limit=3";
+      const url = "https://api.foursquare.com/v2/venues/search?client_id=GOYOWCND2OYMVHWLQSXIGNCFWJMRNQPP3N1HZ3J1M1UIZXHT&client_secret=DZBJ0LH5CIP0Z2GG0TNJHY153YT34EF0XFJH0ZD0HEEJ4WT2&query=lunch&near={ne}&v=20170801&limit=3";
 
-    url = url.replace("{ne}", ne);
+      url = url.replace("{ne}", ne);
 
-    axios.get(url).then(resp => {
-      this.setState({
-        venues : resp.data.response.venues
-      })
-    });
+      axios.get(url).then(resp => {
+        this.setState({
+          venues : resp.data.response.venues
+        })
+      });
+    
   }
 
   changeSelection(idp, col){
