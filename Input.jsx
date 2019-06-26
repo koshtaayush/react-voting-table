@@ -35,28 +35,8 @@ export default class Input extends Component {
     });
   }
 
-  // changeSelection(idp, col){
-  //   var l = this.state.participants.slice();
-  //   console.log("col clicked" +JSON.stringify(l[idp-1]));
-  //   var t = l[idp-1].props.children[col].props.children == "NS" ? "S" : "NS";
-  //   l[idp-1] = 
-  //    <tr>
-  //       <th><input /></th>
-  //       <th id={idp + 0} onClick={() => this.changeSelection(idp, 0)}>{t}</th>
-  //       <th id={idp + 1} onClick={() => this.changeSelection(idp, 1)}>{t}</th>
-  //       <th id={idp + 2} onClick={() => this.changeSelection(idp, 2)}>{t}</th>
-  //   </tr> ;
-  //   this.setState({
-  //     participants : l
-  //   })
-  // }
-
   changeSelection(idp, col){
-    console.log("in th");
     var sl = this.state.selectionList.slice();
-    console.log("idp" +idp);
-    console.log("col" +col);
-    console.log("sdfs "+this.state.selectionList[this.state.selectionList.length-1][0]);
 
     if(col == 0){
       sl[idp] = [1,0,0];
@@ -102,8 +82,6 @@ export default class Input extends Component {
       selectionList : slist
     }, () => {
       var ide = this.state.selectionList.length;
-      // console.log(ide);
-      // console.log(this.state.selectionList);
       plist.push(
         <tr>
           <th><input /></th>
