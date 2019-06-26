@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
-
+import './InputStyle.scss';
 
 export default class Input extends Component {
   constructor(props) {
@@ -17,7 +17,10 @@ export default class Input extends Component {
       venues : [],
       participants: []
     });
-    const url = "https://api.foursquare.com/v2/venues/search?client_id=GOYOWCND2OYMVHWLQSXIGNCFWJMRNQPP3N1HZ3J1M1UIZXHT&client_secret=DZBJ0LH5CIP0Z2GG0TNJHY153YT34EF0XFJH0ZD0HEEJ4WT2&query=lunch&near=Amsterdam&v=20170801&limit=3";
+    let ne = this.refs.venueSearchText.value;
+    const url = "https://api.foursquare.com/v2/venues/search?client_id=GOYOWCND2OYMVHWLQSXIGNCFWJMRNQPP3N1HZ3J1M1UIZXHT&client_secret=DZBJ0LH5CIP0Z2GG0TNJHY153YT34EF0XFJH0ZD0HEEJ4WT2&query=lunch&near={ne}&v=20170801&limit=3";
+
+    url = url.replace("{ne}", ne);
 
     axios.get(url).then(resp => {
       this.setState({
@@ -26,20 +29,20 @@ export default class Input extends Component {
     });
   }
 
-  changeSelection(id, col){
+  changeSelection(idp, col){
     var l = this.state.participants.slice();
-    console.log("col clicked" +JSON.stringify(l[id-1]));
-    l[id-1] = 
+    console.log("col clicked" +JSON.stringify(l[idp-1]));
+    var t = l[idp-1].props.children[col].props.children == "NS" ? "S" : "NS";
+    l[idp-1] = 
      <tr>
         <th><input /></th>
-        <th id={id + 0} onClick={() => this.changeSelection(id, 0)}>S</th>
-        <th id={id + 1} onClick={() => this.changeSelection(id, 1)}>NS</th>
-        <th id={id + 2} onClick={() => this.changeSelection(id, 2)}>NS</th>
+        <th id={idp + 0} onClick={() => this.changeSelection(idp, 0)}>{t}</th>
+        <th id={idp + 1} onClick={() => this.changeSelection(idp, 1)}>{t}</th>
+        <th id={idp + 2} onClick={() => this.changeSelection(idp, 2)}>{t}</th>
     </tr> ;
     this.setState({
       participants : l
     })
-    // l[id-1].props.children[col].props.children = "S";
   }
 
   addParticipant(){
@@ -63,8 +66,8 @@ export default class Input extends Component {
     var participantList = [];
     return (
       <div>
-        <input type="text" />
-        <button onClick={() => this.getSearchResult()}>Search</button>
+        <input className="searchBox" ref="venueSearchText" type="text" />
+        <button className="searchBtn" onClick={() => this.getSearchResult()}>Search</button>
         
         {this.state.venues.length > 0 ? 
         <div>

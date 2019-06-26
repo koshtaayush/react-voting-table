@@ -1,3 +1,8 @@
 h1, p {
   font-family: Lato;
 }
+
+.body{
+  background: lightgray;
+  padding-left: 2em;
+}
