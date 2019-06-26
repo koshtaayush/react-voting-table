@@ -82,7 +82,7 @@ export default class Input extends Component {
             {this.state.participants}
           </tbody>
         </table> 
-        <button onClick={() => this.addParticipant()}>Add participant</button>
+        <button className="addPart" onClick={() => this.addParticipant()}>Add participant</button>
         </div>: null}
       </div>
     )
