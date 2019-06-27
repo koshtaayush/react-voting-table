@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 import './InputStyle.scss';
+import config from './config.js';
 
 export default class Input extends Component {
   constructor(props) {
@@ -25,10 +26,10 @@ export default class Input extends Component {
       if(ne == ""){
         return false;
       }
+      
+      const url = "https://api.foursquare.com/v2/venues/search?client_id={cid}&client_secret={csid}&query=lunch&near={ne}&v=20170801&limit=3";
 
-      const url = "https://api.foursquare.com/v2/venues/search?client_id=GOYOWCND2OYMVHWLQSXIGNCFWJMRNQPP3N1HZ3J1M1UIZXHT&client_secret=DZBJ0LH5CIP0Z2GG0TNJHY153YT34EF0XFJH0ZD0HEEJ4WT2&query=lunch&near={ne}&v=20170801&limit=3";
-
-      url = url.replace("{ne}", ne);
+      url = url.replace("{ne}", ne).replace("{cid}", config.CLIENT_ID).replace("{csid}", config.CLIENT_SECRET_ID);
 
       axios.get(url).then(resp => {
         this.setState({
@@ -40,13 +41,17 @@ export default class Input extends Component {
 
   changeSelection(idp, col){
     var sl = this.state.selectionList.slice();
+    var countList = this.state.selectionCount.slice();
 
     if(col == 0){
       sl[idp] = [1,0,0];
+      countList[countList[0]++, countList[1], countList[2]];
     }else if(col == 1){
       sl[idp] = [0,1,0];
+      countList[countList[0], countList[1]++, countList[2]];
     }else if(col == 2){
       sl[idp] = [0,0,1];
+      countList[countList[0]++, countList[1], countList[2]++];
     }
 
     this.setState({
